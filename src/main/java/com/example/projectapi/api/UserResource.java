@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.projectapi.Model.Role;
+import com.example.projectapi.Model.RoleToUserForm;
 import com.example.projectapi.Model.Users;
 import com.example.projectapi.Service.User.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -109,13 +110,5 @@ public class UserResource {
         }else{
             throw new RuntimeException("Refresh token is mission");
         }
-    }
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    class RoleToUserForm {
-        private String username;
-        private String roleName;
     }
 }
