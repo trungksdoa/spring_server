@@ -8,7 +8,9 @@ import com.example.projectapi.Model.Role;
 import com.example.projectapi.Model.Users;
 import com.example.projectapi.Service.User.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -110,6 +112,8 @@ public class UserResource {
     }
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     class RoleToUserForm {
         private String username;
         private String roleName;
