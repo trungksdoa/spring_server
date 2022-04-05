@@ -13,18 +13,18 @@ import java.util.List;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
 
-@Entity
+//@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @Id
-    @GeneratedValue(strategy = AUTO)
+    //    @Id
+//    @GeneratedValue(strategy = AUTO)
     private Long id;
     private String name;
     private int priceHot;
     private int priceCold;
-    @ManyToOne(fetch = EAGER)
+    //    @ManyToOne(fetch = EAGER)
     private Catagory category = new Catagory();
     private String description;
     private String image; ;
