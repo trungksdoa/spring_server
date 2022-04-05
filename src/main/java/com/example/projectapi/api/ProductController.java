@@ -45,7 +45,7 @@ public class ProductController {
 
     @DeleteMapping("delete")
     public ResponseEntity<String> deleteProduct(@RequestParam String id) {
-//        productService.deleteProduct(Long.parseLong(id));
+        productService.deleteProduct(Long.parseLong(id));
         return ResponseEntity.ok().body("OK");
     }
 
