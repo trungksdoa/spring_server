@@ -40,7 +40,7 @@ public class UserResource {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @GetMapping
+    @GetMapping("roles")
     public ResponseEntity<List<Role>> getRoles() {
         return ResponseEntity.ok().body(userService.roleList());
     }
