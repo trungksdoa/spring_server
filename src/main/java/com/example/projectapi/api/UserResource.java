@@ -40,6 +40,11 @@ public class UserResource {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping
+    public ResponseEntity<List<Role>> getRoles() {
+        return ResponseEntity.ok().body(userService.roleList());
+    }
+
     @PostMapping
     public ResponseEntity<Users> saveUser(@RequestBody Users user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());

@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +51,11 @@ public class UserServiceImplement implements UserService, UserDetailsService {
         log.info("Save user {} to database", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
+    }
+
+    @Override
+    public List<Role> roleList() {
+        return roleRepo.findAll().stream().collect(Collectors.toList());
     }
 
     @Override
