@@ -49,6 +49,12 @@ public class ProductController {
         return ResponseEntity.ok().body("OK");
     }
 
+    @DeleteMapping("catagory/delete")
+    public ResponseEntity<String> deleteCatagory(@RequestParam String id) {
+        catagoryService.deleteCatagory(Long.parseLong(id));
+        return ResponseEntity.ok().body("OK");
+    }
+
     @RequestMapping(value = "", method = RequestMethod.POST, headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product2>> saveProduct(@RequestBody List<Product2> products) {
         for (Product2 items : products) {
@@ -92,6 +98,18 @@ public class ProductController {
                     Long.parseLong(0 + "")
             ));
         }
+        return ResponseEntity.ok().body(catagory);
+    }
+
+
+    @RequestMapping(value = "catagory", method = RequestMethod.PUT, headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Catagory> UpdateCatagorys(@RequestBody Catagory catagory) {
+        Catagory catagory_ = catagoryService.getCatagory(catagory.getId());
+
+
+        catagory_.setName(catagory.getName());
+        catagory_.setParent(catagory.getId());
+        productService.saveCatagory(catagory_);
         return ResponseEntity.ok().body(catagory);
     }
 }

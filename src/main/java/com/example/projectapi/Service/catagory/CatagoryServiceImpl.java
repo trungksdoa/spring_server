@@ -24,10 +24,15 @@ public class CatagoryServiceImpl implements CatagoryService {
 
     @Override
     public Catagory getCatagory(Long id) {
-        if(catagoryRepo.getById(id) == null){
+        if (catagoryRepo.getById(id) == null) {
             throw new IllegalStateException("No catagory have been found");
-        }else{
+        } else {
             return catagoryRepo.getById(id);
         }
+    }
+
+    @Override
+    public void deleteCatagory(Long id) {
+        catagoryRepo.deleteById(id);
     }
 }
