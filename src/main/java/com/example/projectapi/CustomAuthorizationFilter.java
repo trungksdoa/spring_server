@@ -6,9 +6,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.projectapi.dtos.ErrorMessage;
 import com.example.projectapi.dtos.ResponeMessage;
+import com.example.projectapi.handelError.CustomIllegalStateException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.apache.bcel.classfile.Field;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,16 +33,20 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 
 @Slf4j
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
+    private String corsOrgin = "http://localhost:1212";
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-//        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-//        response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS, PUT, DELETE");
-//        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me,Authorization");
+//        response.setHeader("Access-Control-Allow-Origin", corsOrgin);
+//        response.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+//        response.setHeader("Access-Control-Allow-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range,Authorization");
         if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/token/refreshToken")) {
             filterChain.doFilter(request, response);
         } else {
@@ -60,7 +66,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     filterChain.doFilter(request, response);
-                    log.info("Hello {}", username);
+//                    log.info("Hello {}", username);
                 } catch (Exception e) {
                     String exeptionName = e.getClass().getSimpleName();
                     response.setHeader("error", e.getMessage());
@@ -82,5 +88,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
             }
         }
+
     }
 }
