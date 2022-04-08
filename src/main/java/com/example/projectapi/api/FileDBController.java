@@ -40,7 +40,7 @@ public class FileDBController {
     @Autowired
     private FileDBService fileDBService;
 
-    @GetMapping("/hello")
+    @GetMapping("hello")
     public ResponseEntity<String> hello() {
         return ResponseEntity.ok("ok");
     }
