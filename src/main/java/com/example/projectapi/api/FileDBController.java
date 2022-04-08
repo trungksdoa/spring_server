@@ -40,6 +40,11 @@ public class FileDBController {
     @Autowired
     private FileDBService fileDBService;
 
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok("ok");
+    }
+
     @PostMapping("upload")
     public ResponseEntity<ResponeMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         log.info("Upload success");
