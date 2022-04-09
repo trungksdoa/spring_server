@@ -25,7 +25,7 @@ import java.util.Random;
 @RestController
 @RequestMapping("/api/v1/product/")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:1212")
 @Slf4j
 public class ProductController {
 
