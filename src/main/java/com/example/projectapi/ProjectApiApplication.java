@@ -35,10 +35,18 @@ public class ProjectApiApplication {
         return new BCryptPasswordEncoder();
     }
 
-
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("**").allowedOrigins("http://localhost:1212");
+            }
+        };
+    }
 
     @Bean
-    CommandLineRunner run(ProductService productService,UserService userService) {
+    CommandLineRunner run(ProductService productService, UserService userService) {
         return args -> {
 //            List<User> userList = userService.getUsers();
 //            Pageable pageable = PageRequest.of(0,2);
