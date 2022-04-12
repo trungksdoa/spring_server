@@ -87,21 +87,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and() //AND NEXT
                 .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-//        http.csrf().disable();
-//        http.sessionManagement().sessionCreationPolicy(STATELESS);
-////        http.authorizeRequests().anyRequest().permitAll();
-//        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refreshToken/**").permitAll();
-//        //User Routers
-//        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/user/**", "/api/v1/image/files/get/**").hasAnyAuthority("ROLE_USER");
-//        //Admin Routers
-//        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/image/**", "/api/v1/user/**", "/api/v1/product/**").hasAnyAuthority("ROLE_MANAGER");
-//        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/**").hasAnyAuthority("ROLE_MANAGER");
-//        http.cors().and();
-//        http.authorizeRequests().anyRequest().authenticated();
-//        http.addFilter(customfilter);
-//        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-//        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

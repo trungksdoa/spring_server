@@ -6,6 +6,8 @@ import com.example.projectapi.Model.Product2;
 import com.example.projectapi.Repo.CatagoryRepo;
 import com.example.projectapi.Repo.PageProductRepo;
 import com.example.projectapi.Repo.ProductRepo;
+import com.example.projectapi.handelError.CustomAlreadyExistsException;
+import com.example.projectapi.handelError.CustomNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.projectapi.Service.abtract.UserAbstract;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
     public Product2 getProduct(Long id) {
         boolean exist = productRepo.existsById(id);
         if (!exist) {
-            throw new IllegalStateException("Không tìm thấy sản phẩm");
+            throw new CustomNotFoundException("Không tìm thấy sản phẩm");
         }
         return productRepo.getById(id);
     }
@@ -62,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         boolean exist = productRepo.existsById(id);
         if (!exist) {
-            throw new IllegalStateException("Không tìm thấy sản phẩm");
+            throw new CustomNotFoundException("Không tìm thấy sản phẩm");
         }
         productRepo.deleteById(id);
 
@@ -71,6 +73,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Catagory saveCatagory(Catagory catagory) {
         log.info("Save catagory {} to database", catagory.getName());
+        if (catagoryRepo.findByName(catagory.getName().toLowerCase(Locale.ROOT)).equals(catagory))
+            throw new CustomAlreadyExistsException("Catagory already exists");
         return catagoryRepo.save(catagory);
     }
 

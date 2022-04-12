@@ -72,17 +72,17 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     response.setHeader("error", e.getMessage());
                     response.setStatus(500);
                     log.error("Error in " + CustomAuthorizationFilter.class.getName());
-                    ErrorMessage errorMessage = new ErrorMessage(
-                            e.getMessage(),
-                            exeptionName,
-                            HttpServletResponse.SC_INTERNAL_SERVER_ERROR
-                    );
-                    ResponeMessage message = new ResponeMessage(
-                            errorMessage, null
-                    );
-
+//                    ErrorMessage errorMessage = new ErrorMessage(
+//                            e.getMessage(),
+//                            exeptionName,
+//                            HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+//                    );
+//                    ResponeMessage message = new ResponeMessage(
+//                            errorMessage, null
+//                    );
+//
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    new ObjectMapper().writeValue(response.getOutputStream(), message);
+//                    new ObjectMapper().writeValue(response.getOutputStream(), message);
                 }
             } else {
                 filterChain.doFilter(request, response);
