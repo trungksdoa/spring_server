@@ -2,6 +2,7 @@ package com.example.projectapi;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.projectapi.dtos.ErrorMessage;
 import com.example.projectapi.dtos.ResponeMessage;
 import com.example.projectapi.dtos.SuccessMessage;
 import com.example.projectapi.handelError.CustomNotFoundException;
@@ -110,7 +111,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-        throw new CustomNotFoundException(failed.getMessage());
+        ErrorMessage errorMessage = new ErrorMessage();
+
+        errorMessage.setErrorMessage("Không tìm thấy người dùng");
+        ResponeMessage message = new ResponeMessage(
+                errorMessage,
+                null
+        );
+        try {
+            new ObjectMapper().writeValue(response.getOutputStream(), message);
+        } catch (IOException e) {
+            //
+        }
     }
 
     @Override
