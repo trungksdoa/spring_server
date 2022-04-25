@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.projectapi.Model.Role;
 import com.example.projectapi.Model.RoleToUserForm;
-import com.example.projectapi.Model.Users;
+import com.example.projectapi.Model.Users_;
 import com.example.projectapi.Service.User.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -39,8 +39,8 @@ public class UserResource {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<Users>> getUsers() {
-        return ResponseEntity.ok().body(userService.getUsers());
+    public ResponseEntity<List<Users_>> getUsers() {
+        return ResponseEntity.ok().body(userService.getUsers_());
     }
 
     @GetMapping("roles")
@@ -49,13 +49,13 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<Users> saveUser(@RequestBody Users user) {
+    public ResponseEntity<Users_> saveUser(@RequestBody Users_ user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
     @PutMapping
-    public ResponseEntity<Users> UpdateUser(@RequestBody Users user) {
+    public ResponseEntity<Users_> UpdateUser(@RequestBody Users_ user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
@@ -83,7 +83,7 @@ public class UserResource {
                 DecodedJWT decoded_jwt = jwt.verify(token);
                 String username = decoded_jwt.getSubject();
 
-                Users user = userService.getUser(username);
+                Users_ user = userService.getUser(username);
 
                 String accessToken = JWT.create().withSubject(user.getUsername()).withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                         .withIssuer(request.getRequestURI().toString())

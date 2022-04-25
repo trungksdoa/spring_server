@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.AUTO;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Users_ {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
@@ -29,8 +29,8 @@ public class Users {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Users)) return false;
-        Users users = (Users) o;
+        if (!(o instanceof Users_)) return false;
+        Users_ users = (Users_) o;
         return username.equals(users.username);
     }
 

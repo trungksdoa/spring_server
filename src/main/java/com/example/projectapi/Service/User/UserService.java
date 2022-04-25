@@ -1,12 +1,12 @@
 package com.example.projectapi.Service.User;
 
 import com.example.projectapi.Model.Role;
-import com.example.projectapi.Model.Users;
+import com.example.projectapi.Model.Users_;
 
 import java.util.List;
 
 public interface UserService {
-    Users saveUser(Users user);
+    Users_ saveUser(Users_ user);
 
     List<Role> roleList();
 
@@ -14,7 +14,7 @@ public interface UserService {
 
     void addRoleToUser(String username, String roleName);
 
-    Users getUser(String username);
+    Users_ getUser(String username);
 
-    List<Users> getUsers();
+    List<Users_> getUsers_();
 }

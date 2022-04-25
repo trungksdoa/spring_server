@@ -3,7 +3,7 @@ package com.example.projectapi;
 import com.example.projectapi.Model.Catagory;
 import com.example.projectapi.Model.Product;
 import com.example.projectapi.Model.Role;
-import com.example.projectapi.Model.Users;
+import com.example.projectapi.Model.Users_;
 import com.example.projectapi.Service.Product.ProductService;
 import com.example.projectapi.Service.User.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -97,14 +97,14 @@ public class ProjectApiApplication {
 //
 //            //Sinh hoạt
 //            productService.saveCatagory(new Catagory(null, "Dầu gội chai",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Sữa tắm chai",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Dầu gội gói",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Sữa tắm gói",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Kem đánh răng",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Dao cạo râu",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Bàn chải đánh răng",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Thông Cầu Cống",Long.parseLong(0+"")));
-//            productService.saveCatagory(new Catagory(null, "Gội và Xả",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Sữa tắm chai",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Dầu gội gói",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Sữa tắm gói",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Kem đánh răng",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Dao cạo râu",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Bàn chải đánh răng",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Thông Cầu Cống",Long.parseLong(0+"")));
+////            productService.saveCatagory(new Catagory(null, "Gội và Xả",Long.parseLong(0+"")));
         };
     }
 }

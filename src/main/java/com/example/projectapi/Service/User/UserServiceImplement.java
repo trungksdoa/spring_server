@@ -1,7 +1,7 @@
 package com.example.projectapi.Service.User;
 
 import com.example.projectapi.Model.Role;
-import com.example.projectapi.Model.Users;
+import com.example.projectapi.Model.Users_;
 import com.example.projectapi.Repo.RoleRepo;
 import com.example.projectapi.Repo.UserRepo;
 import com.example.projectapi.handelError.CustomAlreadyExistsException;
@@ -32,7 +32,7 @@ public class UserServiceImplement implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        Users user = userRepo.findByUsername(username);
+        Users_ user = userRepo.findByUsername(username);
         if (user == null) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");
@@ -49,7 +49,7 @@ public class UserServiceImplement implements UserService, UserDetailsService {
     }
 
     @Override
-    public Users saveUser(Users user) {
+    public Users_ saveUser(Users_ user) {
         log.info("Save user {} to database", user.getUsername());
         if (userRepo.findByUsername(user.getUsername()).equals(user))
             throw new CustomAlreadyExistsException("User already exists");
@@ -73,7 +73,7 @@ public class UserServiceImplement implements UserService, UserDetailsService {
     @Override
     public void addRoleToUser(String username, String roleName) {
         log.info("Add Role {} to User {}", roleName, username);
-        Users requestUser = new Users();
+        Users_ requestUser = new Users_();
         Role requestRole = new Role();
         requestUser.setUsername(username);
         requestRole.setName(roleName);
@@ -81,15 +81,15 @@ public class UserServiceImplement implements UserService, UserDetailsService {
             throw new CustomNotFoundException("User not found");
         if (!roleRepo.findByName(roleName).equals(requestRole))
             throw new CustomNotFoundException("Role not found");
-        Users user = userRepo.findByUsername(username);
+        Users_ user = userRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
     }
 
     @Override
-    public Users getUser(String username) {
+    public Users_ getUser(String username) {
         log.info("find User {} in database", username);
-        Users requestUser = new Users();
+        Users_ requestUser = new Users_();
         requestUser.setUsername(username);
         if (!userRepo.findByUsername(username).equals(requestUser))
             throw new CustomNotFoundException("User not found");
@@ -97,9 +97,8 @@ public class UserServiceImplement implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<Users> getUsers() {
-        log.info("Find all success");
-        return userRepo.findAll();
+    public List<Users_> getUsers_() {
+        return userRepo.findAll().stream().collect(Collectors.toList());
     }
 
 
